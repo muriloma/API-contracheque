@@ -1,8 +1,9 @@
-const express = require('express');
-const { listarFuncionarios } = require('./controlers/contracheque');
+const { Router } = require('express');
+const { listarFuncionarios, cadastrarFuncionario } = require('./controlers/funcionarios');
 
-const routes = express();
+const routes = Router();
 
-routes.get('funcionario/:id', listarFuncionarios)
+routes.get('/funcionario/:id', listarFuncionarios)
 
-module.exports = routes
+
+module.exports = routes;
