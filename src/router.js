@@ -5,5 +5,6 @@ const routes = Router();
 
 routes.get('/funcionario/:id', listarFuncionarios)
 
+routes.post('/funcionario', cadastrarFuncionario)
 
 module.exports = routes;
