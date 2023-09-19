@@ -2,7 +2,7 @@ const { knex } = require('../connection');
 const { buscarFuncionario, validarDadosFuncionario } = require('../functions/utils');
 
 
-const listarFuncionarios = async (req, res) => {
+const listar = async (req, res) => {
     try {
         const funcionarios = await knex('funcionarios')
 
@@ -16,7 +16,7 @@ const listarFuncionarios = async (req, res) => {
     }
 }
 
-const detalharFuncionarios = async (req, res) => {
+const detalhar = async (req, res) => {
     const { id } = req.params;
 
     try {
@@ -32,7 +32,7 @@ const detalharFuncionarios = async (req, res) => {
     }
 }
 
-const cadastrarFuncionario = async (req, res) => {
+const cadastrar = async (req, res) => {
     const funcionario = req.body;
 
     if (!validarDadosFuncionario(funcionario)) {
@@ -54,7 +54,7 @@ const cadastrarFuncionario = async (req, res) => {
     }
 }
 
-const atualizarFuncionario = async (req, res) => {
+const atualizar = async (req, res) => {
     const novosDados = req.body
     const { id } = req.params
 
@@ -77,4 +77,4 @@ const atualizarFuncionario = async (req, res) => {
     }
 }
 
-module.exports = { listarFuncionarios, detalharFuncionarios, cadastrarFuncionario, atualizarFuncionario };
+module.exports = { listar, detalhar, cadastrar, atualizar };
