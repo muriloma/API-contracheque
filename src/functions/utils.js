@@ -1,17 +1,33 @@
-const pool = require('../../connection');
+const { knex } = require('../connection');
 
 async function buscarFuncionario(id) {
     try {
-        const { rows } = await pool.query({
-            text: `SELECT * FROM funcionarios WHERE id = $1`,
-            values: [id]
-        });
-
-        return rows[0]
-
+        const funcionario = await knex('funcionarios').where('id', id)
+        return funcionario[0]
     } catch (error) {
         return
     }
 }
 
-module.exports = { buscarFuncionario }
+function validarDadosFuncionario(dadosFuncionario) {
+    const camposFuncionario = [
+        'nome',
+        'sobrenome',
+        'cpf',
+        'setor',
+        'salario_bruto',
+        'data_admissao',
+        'plano_saude',
+        'plano_dental',
+        'vale_transporte'
+    ];
+
+    for (let chave of Object.keys(dadosFuncionario)) {
+        if (!camposFuncionario.includes(chave)) {
+            return false
+        };
+    };
+
+    return true
+}
+module.exports = { buscarFuncionario, validarDadosFuncionario }
